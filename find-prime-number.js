@@ -5,7 +5,8 @@ const getPrimeNumber = orderNumber => {
   while (counter < orderNumber) {
     currentNumber += 1;
     let isPrimary = true;
-    for (let i = 2; i <= Math.sqrt(currentNumber); i++) {
+    const sqrtNumber = Math.sqrt(currentNumber); // This is an optimization to reduce the number of iterations
+    for (let i = 2; i <= sqrtNumber; i++) {
       if (currentNumber % i === 0) {
         isPrimary = false;
         break;

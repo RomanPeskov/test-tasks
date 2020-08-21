@@ -1,5 +1,5 @@
-const download = async (fileUrl) => {
-  const response = await fetch(fileUrl, { method: 'GET' });
+const download = async (fileUrl, method) => {
+  const response = await fetch(fileUrl, { method });
   if (response.status >= 300) throw new Error(response.statusText);
   const blob = await response.blob();
   const a = document.createElement('a');
@@ -14,7 +14,7 @@ const downloadUniqUrl = async (url) => {
   const downloadedUrls = JSON.parse(window.localStorage.getItem('downloadedUrls')) || [];
   if (!downloadedUrls.includes(url)) {
     try {
-      await download(url);
+      await download(url, 'GET');
       window.localStorage.setItem('downloadedUrls', JSON.stringify([...downloadedUrls, url]))
     } catch (e) {
       alert(e);
